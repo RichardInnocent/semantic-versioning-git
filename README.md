@@ -4,8 +4,7 @@ A simple GitHub Action tool to create Git tags based on
 
 ## How does it work?
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0) can be used in conjunction
-with this GitHub Action to automatically increment the version of your Maven project, push an
-appropriate tag, and perform a deployment.
+with this GitHub Action to automatically push a suitable incremental tag for your commit.
 
 ### Versioning
 The next version is applied dependent on the commit message. As stipulated by the [Conventional
@@ -30,14 +29,14 @@ recommend using
 [concurrency limits](https://docs.github.com/en/actions/using-jobs/using-concurrency) to allow only
 one job at a time._
 
-For example, a Maven project is currently at version `2.5.6` and is tagged. It then receives the
+For example, a tag currently exists with version `v2.5.6` and is tagged. It then receives the
 following commits:
 
-`feat(#19)!: Added ISBN to books` -> Version is now `3.0.0`  
-`fix(#20): Fixed issue where ...` -> Version is now `3.0.1`  
-`feat(#15): Allow users to se...` -> Version is now `3.1.0`  
-`Merge branch 'main' of https...` -> Version is now `3.1.0`  
-`fix(#15): Prevent users from...` -> Version is now `3.1.1`
+`feat(#19)!: Added ISBN to books` -> Creates tag `v3.0.0`  
+`fix(#20): Fixed issue where ...` -> Creates tag `v3.0.1`  
+`feat(#15): Allow users to se...` -> Creates tag `v3.1.0`  
+`Merge branch 'main' of https...` -> Creates tag `v3.1.0`  
+`fix(#15): Prevent users from...` -> Creates tag `v3.1.1`
 
 The GitHub Action would increment the version to version `3.1.1` and then make the changes to the
 repository to reflect this. A tag (`v3.1.1`) is then pushed.
@@ -94,5 +93,4 @@ The arguments required to run the task are outlined below.
 
 This action should work in a container. Please ensure that your container has the following packages:
 - [Git](https://git-scm.com/)
-- [Maven](https://maven.apache.org/)
 - [Bash](https://www.gnu.org/software/bash/)
