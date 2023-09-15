@@ -1,6 +1,6 @@
 name: semantic-versioning-git
 description: >
-  A simple GitHub Action to increment the Maven version of a project based on conventional commits.
+  A simple GitHub Action to create incremental semantic version tags based on conventional commits.
 author: Richard Innocent
 
 inputs:
