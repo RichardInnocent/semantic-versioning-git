@@ -56,10 +56,12 @@ get_version_increment_type()
 #   current_version: The current version of the Maven project, e.g. 1.0.0
 get_current_version()
 {
+  # Ensure we get all commits not just the latest
+  git fetch --unshallow
   number_of_tags=$(git tag | wc -l | xargs)
   if [[ $number_of_tags == "0" ]]
   then
-    echo "No tags exist. Processing all commits. Assuming initial version is ${1}10.0.0"
+    echo "No tags exist. Processing all commits. Assuming initial version is ${1}0.0.0"
     current_version="0.0.0"
   else
     current_version=$(git describe --tags --abbrev=0)
@@ -114,8 +116,6 @@ get_next_version()
 #       will be on a different line.
 get_relevant_commits()
 {
-  # Ensure we get all commits not just the latest
-  git fetch --unshallow
   number_of_tags=$(git tag | wc -l | xargs)
   if [[ $number_of_tags == "0" ]]
   then
