@@ -66,9 +66,16 @@ get_version_increment_type()
 #   current_version: The current version of the Maven project, e.g. 1.0.0
 get_current_version()
 {
-  current_version=$(git describe --tags --abbrev=0)
-  current_version=${current_version#"$1"}
-  current_version=$(echo "$current_version" | head -1 | xargs)
+  number_of_tags=$(git tag | wc -l | xargs)
+  if [[ $number_of_tags == "0" ]]
+  then
+    echo "No tags exist. Processing all commits. Assuming initial version is ${1}10.0.0"
+    current_version="0.0.0"
+  else
+    current_version=$(git describe --tags --abbrev=0)
+    current_version=${current_version#"$1"}
+    current_version=$(echo "$current_version" | head -1 | xargs)
+  fi
 }
 
 # Gets the next version based on the current version and the commit message.
@@ -134,7 +141,7 @@ get_relevant_commits()
     latest_tag=$(git describe --tags --abbrev=0)
     echo "Latest tag: $latest_tag"
     commit_messages=$(git log "$latest_tag"..HEAD --reverse --format=%s)
-  fi 
+  fi
 }
 
 # Makes the version changes. This includes setting the Maven version and creating and pushing a new
