@@ -1,4 +1,4 @@
-name: semantic-versioning-maven
+name: semantic-versioning-git
 description: >
   A simple GitHub Action to increment the Maven version of a project based on conventional commits.
 author: Richard Innocent
@@ -9,19 +9,6 @@ inputs:
       The token used to perform the commit actions such as committing the version changes to the
       repository. If unset, the default token for your action will be used.
     required: false
-  git-email:
-    description: The email address each commit will be associated with.
-    required: false
-    default: 41898282+github-actions[bot]@users.noreply.github.com
-  git-username:
-    description: The GitHub username each commit will be associated with.
-    required: false
-    default: github-actions[bot]
-  pom-path:
-    description: >
-      The path within your directory where the parent pom.xml you intend to change is located.
-    required: false
-    default: .
   version-prefix:
     description: The prefix to include before the semantic version number.
     required: false

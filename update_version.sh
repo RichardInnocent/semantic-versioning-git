@@ -14,16 +14,6 @@
 #     description: The token used to perform the commit actions such as committing the version
 #         changes to the repository.
 #     example: ghp_123456789abcdefgfijklmnopqrstuvwxyz
-#   GIT_EMAIL
-#     required: false
-#     description: The email address each commit should be associated with.
-#     default: A GitHub-provided no-reply address.
-#     example: my-git-bot@example.com
-#   GIT_USERNAME
-#     required: false
-#     description: The GitHub username each commit should be associated with.
-#     default: github-actions[bot]
-#     example: my-git-bot
 #  VERSION_PREFIX:
 #    description: The prefix to include before the semantic version number
 #    required: false
@@ -162,14 +152,6 @@ make_version_changes()
   git push "$repo" --tags
 }
 
-if [[ -z "$GIT_EMAIL" ]]
-then
-  GIT_EMAIL="41898282+github-actions[bot]@users.noreply.github.com"
-fi
-if [[ -z "$GIT_USERNAME" ]]
-then
-  GIT_USERNAME="semantic-versioning-maven[bot]"
-fi
 if [[ -z "$POM_PATH" ]]
 then
   POM_PATH="."
