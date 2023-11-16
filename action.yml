@@ -39,7 +39,6 @@ runs:
         ACCESS_TOKEN: ${{ inputs.access-token }}
         GIT_EMAIL: ${{ inputs.git-email }}
         GIT_USERNAME: ${{ inputs.git-username }}
-        POM_PATH: ${{ inputs.pom-path }}
         VERSION_PREFIX: ${{ inputs.version-prefix }}
     - name: Print outputs
       run: echo "Updated version. $PREVIOUS_VERSION -> $NEW_VERSION"

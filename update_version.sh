@@ -152,25 +152,21 @@ make_version_changes()
   git push "$repo" --tags
 }
 
-if [[ -z "$POM_PATH" ]]
-then
-  POM_PATH="."
-fi
 if [[ -z ${VERSION_PREFIX+x} ]]
 then
   VERSION_PREFIX="v"
 fi
 
-cd "$POM_PATH" || { echo "Could not cd to pom path. Exiting. Pom path: $POM_PATH"; exit 1; }
+# Git can cause problems in a container as the directory is owner by another user.
+# Make sure Git knows it's safe
+pwd
+git config --global --add safe.directory "$(pwd)"
 
 get_current_version "$VERSION_PREFIX"
 echo "Current version: $current_version"
 echo "previous-version=$current_version" >> "$GITHUB_OUTPUT"
 echo "new-version=$current_version" >> "$GITHUB_OUTPUT"
 
-# Git can cause problems in a container as the directory is owner by another user.
-# Make sure Git knows it's safe
-git config --global --add safe.directory "*"
 get_relevant_commits
 
 if [[ -z "$commit_messages" ]]
