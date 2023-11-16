@@ -159,7 +159,6 @@ fi
 
 # Git can cause problems in a container as the directory is owner by another user.
 # Make sure Git knows it's safe
-pwd
 git config --global --add safe.directory "$(pwd)"
 
 get_current_version "$VERSION_PREFIX"
